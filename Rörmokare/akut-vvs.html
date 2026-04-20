@@ -6,7 +6,7 @@
   <title>Akut VVS-hjälp — Kraft Nordic Service VSS AB</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="akut-page">
   <header>
     <div class="topbar">
       <div class="topbar-left">
@@ -21,39 +21,44 @@
     </div>
   </header>
 
-  <main class="content">
-    <section class="service-header">
-      <div class="service-header-inner service-header-inner-solo">
-        <div class="service-header-card">
-          <h1>Akut VVS-hjälp</h1>
-          <p class="service-lead">Snabb hjälp vid akuta VVS-problem i hemmet. Ring oss direkt så prioriterar vi ditt ärende.</p>
-          <ul>
+  <main class="akut-main">
+    <section class="akut-hero" aria-labelledby="akut-title">
+      <div class="akut-hero-inner">
+        <article class="akut-hero-card">
+          <h1 id="akut-title">Akut VVS-hjälp</h1>
+          <p class="akut-lead">Snabb hjälp vid akuta VVS-problem i hemmet. Ring oss direkt så prioriterar vi ditt ärende.</p>
+          <ul class="akut-list">
             <li>Akuta läckage och vattenstopp</li>
             <li>Jourutryckning vid behov</li>
             <li>Snabb felsökning och tillfällig åtgärd</li>
           </ul>
-          <div class="service-cta">
-            <a href="tel:0739140177" class="btn btn-primary">Ring akut: 073-914 01 77</a>
-            <a href="contact.html" class="btn btn-secondary">Skicka meddelande</a>
+          <div class="akut-cta">
+            <a href="tel:0739140177" class="akut-btn akut-btn-primary" aria-label="Ring akut 073 914 01 77">
+              <span aria-hidden="true">&#9742;</span>
+              <span>Ring akut: 073-914 01 77</span>
+            </a>
+            <a href="contact.html" class="akut-btn akut-btn-secondary">Skicka meddelande</a>
           </div>
-        </div>
+          <p class="akut-note">Ring oss dygnet runt för snabb VVS-hjälp i Stockholmsområdet.</p>
+        </article>
       </div>
     </section>
 
-    <section class="service-content">
-      <div class="service-content-inner">
-        <h2>Viktig information</h2>
-        <p>Uppdatera gärna denna sida med era riktiga kontaktuppgifter och öppettider.</p>
-        <ul class="service-bullets">
+    <section class="akut-info" aria-labelledby="akut-info-title">
+      <div class="akut-info-inner">
+        <h2 id="akut-info-title">Viktig information</h2>
+        <ul class="akut-info-list">
           <li>Telefon jour: 073-914 01 77</li>
-          <li>E-post: info@dinadress.se</li>
+          <li>E-post: kraftnordicservice@gmail.com</li>
           <li>Område: Stockholm med omnejd</li>
-          <li>Öppettider jour: Dygnet runt</li>
+          <li>Öppettider: Dygnet runt</li>
         </ul>
       </div>
     </section>
 
-    <p><a href="index.html">← Tillbaka till startsidan</a></p>
+    <div class="akut-back-link-wrap">
+      <a href="index.html" class="akut-back-link">&larr; Tillbaka till startsidan</a>
+    </div>
   </main>
 
   <script src="script.js"></script>
@@ -66,7 +71,7 @@
       <div class="footer-col">
         <h3>Kontakt</h3>
         <p>Telefon: <a href="tel:0739140177">073-914 01 77</a></p>
-        <p>E-post: <a href="mailto:info@blakraftvvs.se">info@blakraftvvs.se</a></p>
+        <p>E-post: <a href="mailto:kraftnordicservice@gmail.com">kraftnordicservice@gmail.com</a></p>
       </div>
       <div class="footer-col">
         <h3>Villkor och information</h3>

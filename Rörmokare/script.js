@@ -129,6 +129,20 @@ document.addEventListener('DOMContentLoaded', function() {
     serviceSelect.addEventListener('change', updateUrgentNote);
 });
 
+// Toggle ROT information section based on checkbox
+document.addEventListener('DOMContentLoaded', function() {
+    const rotCheckbox = document.querySelector('#rot-checkbox');
+    const rotSection = document.querySelector('#rot-section');
+    if (!rotCheckbox || !rotSection) return;
+
+    function updateROTVisibility() {
+        rotSection.style.display = rotCheckbox.checked ? 'block' : 'none';
+    }
+
+    updateROTVisibility();
+    rotCheckbox.addEventListener('change', updateROTVisibility);
+});
+
 // Homepage: show first 8 services, reveal the rest on demand
 document.addEventListener('DOMContentLoaded', function() {
     const grid = document.querySelector('.services-grid');
@@ -151,5 +165,73 @@ document.addEventListener('DOMContentLoaded', function() {
         cards.slice(visibleCount).forEach(card => card.classList.toggle('is-hidden', !expanded));
         toggleBtn.textContent = expanded ? 'Visa färre tjänster' : 'Visa fler tjänster';
         toggleBtn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    });
+});
+
+// Homepage: show first 8 services, reveal the rest on demand
+document.addEventListener('DOMContentLoaded', function() {
+    const grid = document.querySelector('.services-grid');
+    const toggleBtn = document.querySelector('.services-more-btn');
+    if (!grid || !toggleBtn) return;
+
+    const cards = Array.from(grid.querySelectorAll('.service-card'));
+    const visibleCount = 8;
+
+    if (cards.length <= visibleCount) {
+        toggleBtn.style.display = 'none';
+        return;
+    }
+
+    cards.slice(visibleCount).forEach(card => card.classList.add('is-hidden'));
+
+    let expanded = false;
+    toggleBtn.addEventListener('click', function() {
+        expanded = !expanded;
+        cards.slice(visibleCount).forEach(card => card.classList.toggle('is-hidden', !expanded));
+        toggleBtn.textContent = expanded ? 'Visa färre tjänster' : 'Visa fler tjänster';
+        toggleBtn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    });
+});
+
+// Filter services by category
+document.addEventListener('DOMContentLoaded', function() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const serviceCards = document.querySelectorAll('.service-card');
+    const toggleBtn = document.querySelector('.services-more-btn');
+    const visibleCount = 8;
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const filterValue = this.getAttribute('data-filter');
+
+            // Update active button
+            filterBtns.forEach(b => b.classList.remove('filter-btn--active'));
+            this.classList.add('filter-btn--active');
+
+            // Filter cards and reset expand state
+            let visibleCards = [];
+            serviceCards.forEach(card => {
+                if (filterValue === 'all') {
+                    card.style.display = '';
+                    visibleCards.push(card);
+                } else {
+                    const cardCategory = card.getAttribute('data-category');
+                    if (cardCategory === filterValue) {
+                        card.style.display = '';
+                        visibleCards.push(card);
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+
+            // Reset "Visa fler" button and show all filtered items
+            if (toggleBtn) {
+                // Remove is-hidden from all visible cards so they all show
+                visibleCards.forEach(card => card.classList.remove('is-hidden'));
+                toggleBtn.textContent = 'Visa färre tjänster';
+                toggleBtn.setAttribute('aria-expanded', 'true');
+            }
+        });
     });
 });
