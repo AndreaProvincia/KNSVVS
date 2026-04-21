@@ -235,7 +235,7 @@ body.topbar-fixed-padding {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 0;
+    gap: 0.6rem;
     justify-content: flex-start;
     min-width: 320px;
 }
@@ -262,12 +262,15 @@ body.topbar-fixed-padding {
     transition: transform 0.2s ease, opacity 0.2s ease;
 }
 .company-name {
+    display: inline-block;
     font-weight: 700;
     color: #1a237e;
-    font-size: 0.95rem;
-    line-height: 1;
-    text-align: center;
-    display: block;
+    font-size: 0.98rem;
+    line-height: 1.2;
+    text-align: left;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.45);
 }
 .topbar-center {
     display: none;
@@ -369,7 +372,7 @@ body.topbar-fixed-padding {
 
 @media (max-width: 700px) {
     .search-form { max-width: 220px; }
-    .company-name { font-size: 0.85rem; }
+    .company-name { display: none; }
 }
 
 /* Shrink topbar when scrolling: animate to zero height and hide */
@@ -405,6 +408,7 @@ body.topbar-fixed-padding {
     .topbar-left {
         min-width: 0;
         flex: 1;
+        gap: 0;
     }
 
     .topbar-brand {
