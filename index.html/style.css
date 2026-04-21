@@ -1590,6 +1590,27 @@ main {
     color: #e3ecff;
 }
 
+.form-status {
+    margin: 1rem 0 0;
+    padding: 0.9rem 1rem;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.form-status--success {
+    background: #e8f7f1;
+    color: #0b6b4f;
+    border: 1px solid #b7e4d4;
+}
+
+.form-status--error {
+    background: #fff2f2;
+    color: #b42318;
+    border: 1px solid #fecaca;
+}
+
 .back-link {
     display: inline-block;
     margin-top: 2rem;

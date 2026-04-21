@@ -158,8 +158,10 @@
             Skicka bokningsförfrågan
           </button>
 
+          <p class="form-status" aria-live="polite" hidden></p>
+
           <p class="form-meta">
-            Du far ett bekräftelsemejl direkt efter att formuläret har skickats.<br>
+            Vi skickar din förfrågan direkt till oss när formuläret skickas.<br>
             ⏱ Vi återkommer vanligtvis inom 24 timmar<br>
             ✔ Inget bindande – du bekräftar alltid först
           </p>
@@ -204,15 +206,43 @@
   <script>
     document.querySelector(".booking-form").addEventListener("submit", function(e) {
       e.preventDefault();
+      const form = this;
+      const submitButton = form.querySelector('button[type="submit"]');
+      const status = form.querySelector('.form-status');
+
+      if (status) {
+        status.hidden = true;
+        status.textContent = "";
+        status.classList.remove('form-status--success', 'form-status--error');
+      }
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Skickar...';
+      }
 
       emailjs.sendForm(
         "service_137fu77",
         "template_oizz8fw",
-        this
+        form
       ).then(function() {
-        alert("Tack! Din bokningsförfrågan är skickad. Vi återkommer inom kort.");
-      }, function(error) {
-        alert("Något gick fel. Försök igen.");
+        form.reset();
+        if (status) {
+          status.hidden = false;
+          status.textContent = "Tack! Din bokningsförfrågan är skickad. Vi återkommer inom kort.";
+          status.classList.add('form-status--success');
+        }
+      }, function() {
+        if (status) {
+          status.hidden = false;
+          status.textContent = "Något gick fel. Försök igen eller ring oss direkt på 073-914 01 77.";
+          status.classList.add('form-status--error');
+        }
+      }).finally(function() {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = 'Skicka bokningsförfrågan';
+        }
       });
     });
   </script>

@@ -90,9 +90,9 @@
             <label for="contact-message">Meddelande</label>
             <textarea id="contact-message" name="message" placeholder="Beskriv kort vad du behöver hjälp med" required></textarea>
 
-            <p class="form-meta">Du far ett bekräftelsemejl direkt efter att formuläret har skickats.</p>
-
             <button type="submit" class="btn btn-book">Skicka förfrågan</button>
+            <p class="form-status" aria-live="polite" hidden></p>
+            <p class="form-meta">Vi skickar din förfrågan direkt till oss när formuläret skickas.</p>
           </form>
         </div>
 
@@ -133,15 +133,43 @@
   <script>
     document.querySelector(".contact-right form").addEventListener("submit", function(e) {
       e.preventDefault();
+      const form = this;
+      const submitButton = form.querySelector('button[type="submit"]');
+      const status = form.querySelector('.form-status');
+
+      if (status) {
+        status.hidden = true;
+        status.textContent = "";
+        status.classList.remove('form-status--success', 'form-status--error');
+      }
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Skickar...';
+      }
 
       emailjs.sendForm(
         "service_137fu77",
         "template_oizz8fw",
-        this
+        form
       ).then(function() {
-        alert("Tack! Din förfrågan är skickad.");
-      }, function(error) {
-        alert("Något gick fel. Försök igen.");
+        form.reset();
+        if (status) {
+          status.hidden = false;
+          status.textContent = "Tack! Din förfrågan är skickad. Vi återkommer så snart vi kan.";
+          status.classList.add('form-status--success');
+        }
+      }, function() {
+        if (status) {
+          status.hidden = false;
+          status.textContent = "Något gick fel. Försök igen eller ring oss direkt på 073-914 01 77.";
+          status.classList.add('form-status--error');
+        }
+      }).finally(function() {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = 'Skicka förfrågan';
+        }
       });
     });
   </script>
