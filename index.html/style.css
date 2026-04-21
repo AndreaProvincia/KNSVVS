@@ -247,6 +247,7 @@ body.topbar-fixed-padding {
     height: calc(var(--topbar-height) - -45px);
     text-decoration: none;
     overflow: hidden;
+    order: 2;
 }
 
 .logo {
@@ -263,6 +264,7 @@ body.topbar-fixed-padding {
 }
 .company-name {
     display: inline-block;
+    order: 1;
     font-weight: 700;
     color: #1a237e;
     font-size: 0.98rem;
